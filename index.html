@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toss A Coin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+        .coin{
+            width: 100%;
+            height: 75vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .start{
+            width: 100%;
+            height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .footer{
+            height: 6.25vh;
+            display: flex;
+            align-items: flex-end;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section id="main">
+            <div class="main">
+
+                    <div class="start" id="start">
+                        <p class="display-3 text-secondary animate__animated animate__backInDown">Toss A Coin</p>
+                        <button type="button" id="tossButton" onclick="toss()" class="btn btn-warning m-4 animate__animated animate__backInUp">Toss</button>
+                    </div>
+
+                    <button type="button" id="goBack" onclick="exit()" class="btn btn-outline-danger m-4">Exit</button>
+
+                    <div class="coin" id="coin" ondblclick="toss()">
+                        <div class="heads animate__animated" id="heads">
+                            <img src="heads.png" width="300" height="300" alt="Heads">
+                        </div>
+                        <div class="tails animate__animated" id="tails">
+                            <img src="tails.png" width="300" height="300" alt="tails">
+                        </div>
+                    </div>
+
+                    <small class="d-flex justify-content-end text-info" id="instructions">Double tap to toss a coin</small>
+
+                </div>
+            
+        </section>
+
+        <section  id="footer">
+            <div class="footer">
+                <small>
+                    Made with 
+                    <svg style="color: red;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg> 
+                    By <a style="color: black;" href="mailto:ykumat@gmail.com">Yash Kumat</a>
+                </small>
+            </div>
+        </section>
+    
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script>
+
+        let heads = document.getElementById('heads')
+        let tails = document.getElementById('tails')
+        let start = document.getElementById('start')
+        let coin = document.getElementById('coin')
+        let goBack = document.getElementById('goBack')
+        let footer = document.getElementById('footer')
+        let instructions = document.getElementById('instructions')
+        
+
+        window.onload = function(){
+            heads.style.display = 'none'
+            tails.style.display = 'none'
+            goBack.style.display = 'none'
+            instructions.style.display = 'none'
+            footer.style.display = 'none'
+            
+        }
+
+        toss = () => {
+
+            start.style.display = 'none'
+            goBack.style.display = 'block'
+            footer.style.display = 'block'
+            instructions.style.display = 'block'
+
+            let result = Math.round(Math.random())
+            
+            if(result){
+                heads.style.display = 'block'
+                heads.classList.add('animate__flip')
+                tails.style.display = 'none'
+                setTimeout(()=>heads.classList.remove('animate__flip'),1000)
+                
+            }else{
+                tails.style.display = 'block'
+                tails.classList.add('animate__flip')
+                heads.style.display = 'none'
+                setTimeout(()=>tails.classList.remove('animate__flip'),1000)
+            }
+        }
+
+        exit = () => {
+            location.reload()
+        }
+
+    </script>
+</body>
+</html>
